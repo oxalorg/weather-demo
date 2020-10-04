@@ -1,37 +1,10 @@
 import moment from "moment";
 import axios from "axios";
 import styles from "../styles/Home.module.css";
-import { KelvinToCelcius } from "./utils.js";
+import Landing from "./components/Landing.jsx";
 
-const UserLocation = ({ weather }) => {
-  let time = moment.unix(weather.current.dt);
-  console.log(time);
-  return (
-    <div>
-      {weather.timezone} | {weather.timezone_offset}
-      <p>{weather.current.dt}</p>
-      <p>{time.fromNow()}</p>
-      <ul>
-        {weather.hourly.map((item) => {
-          var hourTime = moment.unix(item.dt);
-          return (
-            <li>
-              {hourTime.fromNow()} |{KelvinToCelcius(item.temp)} Degrees
-            </li>
-          );
-        })}
-      </ul>
-    </div>
-  );
-};
-
-export default function Home({ name, weather }) {
-  return (
-    <div className="">
-      Current temp is: {weather.current.temp}
-      <UserLocation weather={weather} />
-    </div>
-  );
+export default function Home({ weather }) {
+  return <Landing weather={weather} />;
 }
 
 export async function getServerSideProps(context) {

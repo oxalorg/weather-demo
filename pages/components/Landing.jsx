@@ -1,31 +1,52 @@
 import moment from "moment";
 import axios from "axios";
-import styles from "../styles/Home.module.css";
-import Landing from "./components/Landing.js";
+import { KelvinToCelcius } from "../utils.js";
+import styles from "./Landing.module.scss";
 
-export default function Home({ weather }) {
-  return <Landing weather={weather} />;
-}
+const HourlyList = ({ weather }) => {
+  let time = moment.unix(weather.current.dt);
+  return (
+    <div className={styles.timeSlot}>
+      <div className={styles.timeSlot__list}>
+        {weather.hourly.map((item) => {
+          var hourTime = moment.unix(item.dt);
+          return (
+            <div className={styles.timeSlot__item}>
+              <div className={styles.timeSlot__itemTime}>
+                {hourTime.format("h a")}
+              </div>
+              <div className={styles.timeSlot__itemTemp}>
+                {KelvinToCelcius(item.temp)} &deg;
+              </div>
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  );
+};
 
-export async function getServerSideProps(context) {
-  const API_KEY = process.env.OPENWEATHER_API_KEY;
-  const lat = "19.069979699999998";
-  const lon = "72.8397202";
+const UserCity = ({ weather }) => {
+  return <button className={styles.badge}>{weather.timezone}</button>;
+};
 
-  let res = await axios({
-    method: "GET",
-    url: `https://api.openweathermap.org/data/2.5/onecall`,
-    params: {
-      lat: lat,
-      lon: lon,
-      exclude: "minutely,alerts",
-      appid: API_KEY,
-    },
-  });
-  let weather = res.data;
-  return {
-    props: {
-      weather: weather,
-    },
-  };
+export default function Landing({ weather }) {
+  let currentTemp = KelvinToCelcius(weather.current.temp);
+
+  return (
+    <div className={styles.container}>
+      <div className={styles.tempCityContainer}>
+        <div>
+          <UserCity weather={weather} />
+        </div>
+        <div className={styles.currentTemp}>
+          {currentTemp}
+          <span className={styles.currentTemp__unit}>0C</span>
+        </div>
+      </div>
+      <div className={styles.statusSelectorContainer}>
+        <HourlyList weather={weather} />
+      </div>
+    </div>
+  );
 }

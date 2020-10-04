@@ -1,8 +1,78 @@
+$text-color: #333333;
+$primary-color: #ff3a3f;
+$bg-color: #ececec;
+
 .container {
-  background-color: #d3d3d3;
+  background-color: $bg-color;
+  padding: 12px 4px;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
 }
 
-.current-temp {
-  font-size: 4rem;
+.currentTemp {
+  font-size: 10rem;
   font-weight: bold;
+  vertical-align: top;
+}
+.currentTemp__unit {
+  font-size: 1rem;
+}
+
+.badge {
+  border-radius: 4rem;
+  padding: 1rem 1rem;
+  font-weight: bold;
+  border: 1px solid $text-color;
+  background-color: inherit;
+}
+
+.tempCityContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  flex-basis: 50%;
+}
+
+.statusSelectorContainer {
+  display: flex;
+  flex-direction: column;
+  flex-basis: 50%;
+}
+
+.timeSlot {
+  display: flex;
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
+.timeSlot__list {
+  list-style: none;
+  display: flex;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.timeSlot__item {
+  display: flex;
+  flex-direction: column;
+  margin-left: 12px;
+  padding: 12px 12px;
+  border-radius: 6rem;
+  border: 2px solid $text-color;
+  align-items: center;
+  text-align: center;
+  width: 65px;
+  flex-shrink: 0;
+  font-weight: bold;
+}
+
+.timeSlot__itemTime {
+  padding: 12px 2px;
+}
+
+.timeSlot__itemTemp {
+  padding: 12px 2px;
 }
