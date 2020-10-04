@@ -1,0 +1,12 @@
+$text-color: #333333;
+
+.container {
+}
+
+.item {
+  border: 2px solid $text-color;
+}
+
+.item__active {
+  border: 2px solid $text-color;
+}

@@ -1,7 +1,7 @@
 import moment from "moment";
-import axios from "axios";
-import { KelvinToCelcius } from "../utils.js";
+import { KelvinToCelcius } from "../utils";
 import styles from "./Landing.module.scss";
+import DateSelector from "./DateSelector.jsx";
 
 const HourlyList = ({ weather }) => {
   let time = moment.unix(weather.current.dt);
@@ -30,7 +30,7 @@ const UserCity = ({ weather }) => {
   return <button className={styles.badge}>{weather.timezone}</button>;
 };
 
-export default function Landing({ weather }) {
+const Landing = ({ weather }) => {
   let currentTemp = KelvinToCelcius(weather.current.temp);
 
   return (
@@ -46,7 +46,10 @@ export default function Landing({ weather }) {
       </div>
       <div className={styles.statusSelectorContainer}>
         <HourlyList weather={weather} />
+        <DateSelector />
       </div>
     </div>
   );
-}
+};
+
+export default Landing;
