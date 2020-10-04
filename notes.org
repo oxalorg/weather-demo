@@ -1,8 +1,29 @@
 * Current user location
-* OpenWeather API f50f54478239c092e58af9ca5ed6b195
+* OpenWeather API
 * Home page -> Show current weather
 - option to different date / time
 * styling and transition
 - when switching between dates/time
 
 [[file:~/projects/alzion-weather/pages/index.jsx][file:~/projects/alzion-weather/pages/index.jsx]]
+
+#+BEGIN_SRC elisp
+(- 1601823600 1601827200)
+#+END_SRC
+
+#+RESULTS:
+: -3600
+
+#+BEGIN_SRC elisp
+(- 1601825249 1601823600)
+#+END_SRC
+
+#+RESULTS:
+: 1649
+
+#+BEGIN_SRC elisp
+(concat decode-time (seconds-to-time 1601825249)))
+#+END_SRC
+
+#+RESULTS:
+| 29 | 57 | 20 | 4 | 10 | 2020 | 0 | nil | 19800 |
