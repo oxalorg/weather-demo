@@ -1,6 +1,7 @@
 import moment from "moment";
 import axios from "axios";
 import styles from "../styles/Home.module.css";
+import { KelvinToCelcius } from "./utils.js";
 
 const UserLocation = ({ weather }) => {
   let time = moment.unix(weather.current.dt);
@@ -13,7 +14,11 @@ const UserLocation = ({ weather }) => {
       <ul>
         {weather.hourly.map((item) => {
           var hourTime = moment.unix(item.dt);
-          return <li>{hourTime.fromNow()}</li>;
+          return (
+            <li>
+              {hourTime.fromNow()} |{KelvinToCelcius(item.temp)} Degrees
+            </li>
+          );
         })}
       </ul>
     </div>
