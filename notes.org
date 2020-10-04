@@ -1,0 +1,8 @@
+* Current user location
+* OpenWeather API f50f54478239c092e58af9ca5ed6b195
+* Home page -> Show current weather
+- option to different date / time
+* styling and transition
+- when switching between dates/time
+
+[[file:~/projects/alzion-weather/pages/index.jsx][file:~/projects/alzion-weather/pages/index.jsx]]
