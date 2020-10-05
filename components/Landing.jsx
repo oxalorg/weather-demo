@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useMemo } from "react";
 import moment from "moment";
 import { KelvinToCelcius } from "../utils";
 
@@ -42,8 +42,19 @@ const UserCity = ({ timezone }) => {
   return <button className={styles.badge}>{timezone}</button>;
 };
 
+const matchesDayOffset = (dt, dayOffset) => {
+  let offsetDay = moment().add(dayOffset, "days");
+  let matches = moment.unix(dt).isSame(offsetDay, "day");
+  return matches;
+};
+
 const Landing = ({ weather }) => {
-  let [hourly, setHourly] = useState(weather.hourly);
+  let [selectedDay, setSelectedDay] = useState(0);
+  let hourly = useMemo(() => {
+    return weather.hourly.filter((item) => {
+      return matchesDayOffset(item.dt, selectedDay);
+    });
+  }, [selectedDay]);
   let [current, setCurrent] = useState(weather.hourly[0]);
 
   const selectCurrentTimeSlot = (dt) => {
@@ -70,7 +81,10 @@ const Landing = ({ weather }) => {
           selectCurrentTimeSlot={selectCurrentTimeSlot}
           currentDt={current.dt}
         />
-        <DateSelector />
+        <DateSelector
+          selectedDay={selectedDay}
+          setSelectedDay={setSelectedDay}
+        />
       </div>
     </div>
   );
