@@ -1,5 +1,4 @@
-$text-color: #333333;
-$primary-color: #ff3a3f;
+$text-color: #000000;
 $bg-color: #ececec;
 
 .container {
@@ -42,6 +41,16 @@ $bg-color: #ececec;
   flex-basis: 50%;
 }
 
+.weatherDescription {
+  display: none;
+}
+
+.dateSelectorContainer {
+  margin-top: 1rem;
+  display: flex;
+  justify-content: center;
+}
+
 @media (min-width: 768px) {
   .container {
     background-color: $bg-color;
@@ -68,25 +77,8 @@ $bg-color: #ececec;
     padding-top: 24px;
   }
 
-  .timeSlot {
-    margin-bottom: 3rem;
-    margin-top: 0;
-  }
-
-  .timeSlot__list {
-    flex-wrap: wrap;
-  }
-
-  .timeSlot__item {
-    margin-top: 1rem;
-    padding: 0;
-  }
-
-  .timeSlot__itemTemp {
-    display: none;
-  }
-
   .weatherDescription {
+    display: block;
     font-size: 128px;
     font-weight: bold;
     flex-grow: 1;
@@ -94,6 +86,6 @@ $bg-color: #ececec;
   }
 
   .dateSelectorContainer {
-    margin-top: 1rem;
+    justify-content: start;
   }
 }

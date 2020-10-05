@@ -46,7 +46,11 @@ const Landing = ({ weather }) => {
         <div>
           <UserCity weather={weather} />
         </div>
-        <div className={styles.currentTemp}>
+        <div
+          className={
+            styles.currentTemp + " transition duration-150 ease-in-out"
+          }
+        >
           {KelvinToCelcius(current.temp)}
           <span className={styles.currentTemp__unit}>0C</span>
         </div>

@@ -13,7 +13,7 @@ const dateOptions = [
 
 const DateSelector = ({ selectedDay, setSelectedDay }) => {
   return (
-    <div className="flex flex-column items-center self-center md:self-start md:mb-8">
+    <div className="flex flex-column items-center md:mb-8">
       {dateOptions.map((option) => {
         let isActive = option.offset === selectedDay;
         return (
@@ -21,7 +21,9 @@ const DateSelector = ({ selectedDay, setSelectedDay }) => {
             key={option.offset}
             className={
               `ml-2 font-bold text-xs px-4 py-2 ` +
-              (isActive ? "border border-black rounded-full" : "")
+              (isActive
+                ? "bg-black text-white border border-black rounded-full"
+                : "")
             }
             onClick={(e) => {
               e.preventDefault();

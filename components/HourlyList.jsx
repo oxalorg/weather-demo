@@ -1,4 +1,6 @@
+import moment from "moment";
 import styles from "./HourlyList.module.scss";
+import { KelvinToCelcius } from "../utils";
 
 const HourlyList = ({ hourly, selectCurrentTimeSlot, currentDt }) => {
   return (
