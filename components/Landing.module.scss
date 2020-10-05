@@ -69,6 +69,12 @@ $bg-color: #ececec;
   font-weight: bold;
 }
 
+.timeSlot__item__active {
+  @extend .timeSlot__item;
+  background-color: $text-color;
+  color: $bg-color;
+}
+
 .timeSlot__itemTime {
   padding: 12px 2px;
 }
