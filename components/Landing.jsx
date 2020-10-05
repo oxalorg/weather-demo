@@ -1,5 +1,6 @@
 import React, { useState, useMemo } from "react";
 import moment from "moment";
+import { CSSTransition, SwitchTransition } from "react-transition-group";
 import { KelvinToCelcius } from "../utils";
 
 import styles from "./Landing.module.scss";
@@ -25,6 +26,22 @@ const matchesDayOffset = (dt, dayOffset) => {
   return matches;
 };
 
+const FadeAnimation = ({ children, transitionKey }) => {
+  return (
+    <SwitchTransition mode="out-in">
+      <CSSTransition
+        classNames="fade"
+        addEndListener={(node, done) => {
+          node.addEventListener("transitionend", done, false);
+        }}
+        key={transitionKey}
+      >
+        {children}
+      </CSSTransition>
+    </SwitchTransition>
+  );
+};
+
 const Landing = ({ weather }) => {
   let [selectedDay, setSelectedDay] = useState(0);
   let hourly = useMemo(() => {
@@ -46,14 +63,16 @@ const Landing = ({ weather }) => {
         <div>
           <UserCity weather={weather} />
         </div>
-        <div
-          className={
-            styles.currentTemp + " transition duration-150 ease-in-out"
-          }
-        >
-          {KelvinToCelcius(current.temp)}
-          <span className={styles.currentTemp__unit}>0C</span>
-        </div>
+        <FadeAnimation transitionKey={current.dt}>
+          <div
+            className={
+              styles.currentTemp + " transition duration-150 ease-in-out"
+            }
+          >
+            {KelvinToCelcius(current.temp)}
+            <span className={styles.currentTemp__unit}>0C</span>
+          </div>
+        </FadeAnimation>
       </div>
       <div className={styles.statusSelectorContainer}>
         <HourlyList
@@ -67,7 +86,9 @@ const Landing = ({ weather }) => {
             setSelectedDay={setSelectedDay}
           />
         </div>
-        <WeatherDescription description={current.weather[0].description} />
+        <FadeAnimation transitionKey={current.dt}>
+          <WeatherDescription description={current.weather[0].description} />
+        </FadeAnimation>
       </div>
     </div>
   );
