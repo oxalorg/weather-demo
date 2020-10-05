@@ -1,11 +1,11 @@
 import React, { useState, useMemo } from "react";
 import moment from "moment";
-import { CSSTransition, SwitchTransition } from "react-transition-group";
 import { KelvinToCelcius } from "../utils";
 
 import styles from "./Landing.module.scss";
-import DateSelector from "./DateSelector.jsx";
-import HourlyList from "./HourlyList.jsx";
+import DateSelector from "./DateSelector";
+import HourlyList from "./HourlyList";
+import FadeAnimation from "./FadeAnimation";
 
 const UserCity = ({ timezone }) => {
   return <button className={styles.badge}>{timezone}</button>;
@@ -24,22 +24,6 @@ const matchesDayOffset = (dt, dayOffset) => {
   let offsetDay = moment().add(dayOffset, "days");
   let matches = moment.unix(dt).isSame(offsetDay, "day");
   return matches;
-};
-
-const FadeAnimation = ({ children, transitionKey }) => {
-  return (
-    <SwitchTransition mode="out-in">
-      <CSSTransition
-        classNames="fade"
-        addEndListener={(node, done) => {
-          node.addEventListener("transitionend", done, false);
-        }}
-        key={transitionKey}
-      >
-        {children}
-      </CSSTransition>
-    </SwitchTransition>
-  );
 };
 
 const Landing = ({ weather }) => {
