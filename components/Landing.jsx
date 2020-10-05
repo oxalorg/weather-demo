@@ -42,6 +42,15 @@ const UserCity = ({ timezone }) => {
   return <button className={styles.badge}>{timezone}</button>;
 };
 
+const WeatherDescription = ({ description }) => {
+  const isTooLong = description.length > 14;
+  return (
+    <div className={styles.weatherDescription}>
+      {isTooLong ? description.substring(0, 14) + "..." : description}
+    </div>
+  );
+};
+
 const matchesDayOffset = (dt, dayOffset) => {
   let offsetDay = moment().add(dayOffset, "days");
   let matches = moment.unix(dt).isSame(offsetDay, "day");
@@ -81,10 +90,13 @@ const Landing = ({ weather }) => {
           selectCurrentTimeSlot={selectCurrentTimeSlot}
           currentDt={current.dt}
         />
-        <DateSelector
-          selectedDay={selectedDay}
-          setSelectedDay={setSelectedDay}
-        />
+        <div className={styles.dateSelectorContainer}>
+          <DateSelector
+            selectedDay={selectedDay}
+            setSelectedDay={setSelectedDay}
+          />
+        </div>
+        <WeatherDescription description={current.weather[0].description} />
       </div>
     </div>
   );
