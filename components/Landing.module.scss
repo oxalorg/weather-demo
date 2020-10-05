@@ -25,13 +25,15 @@ $circle-radius: 200px;
 }
 
 .currentTemp {
-  font-size: 10rem;
+  font-size: 12rem;
   font-weight: bold;
   vertical-align: top;
 }
 
 .currentTemp__unit {
-  font-size: 1rem;
+  font-size: 2rem;
+  vertical-align: top;
+  line-height: 3;
 }
 
 .badge {

@@ -63,7 +63,7 @@ const Landing = ({ weather }) => {
             }
           >
             {KelvinToCelcius(current.temp)}
-            <span className={styles.currentTemp__unit}>0C</span>
+            <span className={styles.currentTemp__unit}>&deg;C</span>
           </div>
         </FadeAnimation>
       </div>
