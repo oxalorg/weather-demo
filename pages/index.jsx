@@ -1,7 +1,7 @@
 import moment from "moment";
 import axios from "axios";
 import styles from "../styles/Home.module.css";
-import Landing from "./components/Landing.jsx";
+import Landing from "../components/Landing.jsx";
 
 export default function Home({ weather }) {
   return <Landing weather={weather} />;
