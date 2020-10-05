@@ -50,7 +50,6 @@ const Landing = ({ weather }) => {
           {KelvinToCelcius(current.temp)}
           <span className={styles.currentTemp__unit}>0C</span>
         </div>
-        <div className="font-bold">{current.weather[0].description}</div>
       </div>
       <div className={styles.statusSelectorContainer}>
         <HourlyList

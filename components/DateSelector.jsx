@@ -13,7 +13,7 @@ const dateOptions = [
 
 const DateSelector = ({ selectedDay, setSelectedDay }) => {
   return (
-    <div className="flex flex-column items-center self-center lg:self-start lg:mb-8">
+    <div className="flex flex-column items-center self-center md:self-start md:mb-8">
       {dateOptions.map((option) => {
         let isActive = option.offset === selectedDay;
         return (
