@@ -32,3 +32,5 @@ const HourlyList = ({ hourly, selectCurrentTimeSlot, currentDt }) => {
     </div>
   );
 };
+
+export default HourlyList;
