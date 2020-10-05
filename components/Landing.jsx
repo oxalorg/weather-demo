@@ -6,6 +6,7 @@ import styles from "./Landing.module.scss";
 import DateSelector from "./DateSelector";
 import HourlyList from "./HourlyList";
 import FadeAnimation from "./FadeAnimation";
+import { CSSTransition } from "react-transition-group";
 
 const UserCity = ({ timezone }) => {
   return <button className={styles.badge}>{timezone}</button>;
@@ -34,6 +35,10 @@ const Landing = ({ weather }) => {
     });
   }, [selectedDay]);
   let [current, setCurrent] = useState(weather.hourly[0]);
+  let shapeBgColor = useMemo(() => {
+    let colorMaps = ["yellow", "blue", "cyan", "gray"];
+    return colorMaps[Math.floor(Math.random() * colorMaps.length)];
+  }, [current]);
 
   const selectCurrentTimeSlot = (dt) => {
     let selected = hourly.find((item) => item.dt === dt);
@@ -43,6 +48,10 @@ const Landing = ({ weather }) => {
 
   return (
     <div className={styles.container}>
+      <div
+        className={styles.shape}
+        style={{ backgroundColor: shapeBgColor }}
+      ></div>
       <div className={styles.tempCityContainer}>
         <div>
           <UserCity weather={weather} />

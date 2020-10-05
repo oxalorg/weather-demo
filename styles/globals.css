@@ -1,5 +1,6 @@
 html,
 body {
+  background-color: #ececec;
   padding: 0;
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
@@ -21,7 +22,7 @@ a {
 
 .fade-enter-active {
   opacity: 1;
-  transition: opacity 300ms cubic-bezier(0.55, 0.085, 0.68, 0.53);
+  transition: all 300ms cubic-bezier(0.55, 0.085, 0.68, 0.53);
 }
 
 .fade-exit {
@@ -30,5 +31,23 @@ a {
 
 .fade-exit-active {
   opacity: 0;
-  transition: opacity 200ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  transition: all 200ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.fade-bg-enter {
+  opacity: 0;
+}
+
+.fade-bg-enter-active {
+  opacity: 1;
+  transition: all 300ms cubic-bezier(0.55, 0.085, 0.68, 0.53);
+}
+
+.fade-bg-exit {
+  opacity: 1;
+}
+
+.fade-bg-exit-active {
+  opacity: 0;
+  transition: all 200ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
