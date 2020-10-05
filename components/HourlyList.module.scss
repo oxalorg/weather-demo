@@ -1,0 +1,61 @@
+.timeSlot {
+  display: flex;
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
+.timeSlot__list {
+  list-style: none;
+  display: flex;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.timeSlot__item {
+  display: flex;
+  flex-direction: column;
+  margin-left: 12px;
+  padding: 12px 12px;
+  border-radius: 6rem;
+  border: 2px solid $text-color;
+  align-items: center;
+  text-align: center;
+  width: 65px;
+  flex-shrink: 0;
+  font-weight: bold;
+}
+
+.timeSlot__item__active {
+  @extend .timeSlot__item;
+  background-color: $text-color;
+  color: $bg-color;
+}
+
+.timeSlot__itemTime {
+  padding: 12px 2px;
+}
+
+.timeSlot__itemTemp {
+  padding: 12px 2px;
+}
+
+@media (min-width: 768px) {
+  .timeSlot {
+    margin-bottom: 3rem;
+    margin-top: 0;
+  }
+
+  .timeSlot__list {
+    flex-wrap: wrap;
+  }
+
+  .timeSlot__item {
+    margin-top: 1rem;
+    padding: 0;
+  }
+
+  .timeSlot__itemTemp {
+    display: none;
+  }
+}

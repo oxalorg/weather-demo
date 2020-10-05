@@ -15,6 +15,7 @@ $bg-color: #ececec;
   font-weight: bold;
   vertical-align: top;
 }
+
 .currentTemp__unit {
   font-size: 1rem;
 }
@@ -41,44 +42,58 @@ $bg-color: #ececec;
   flex-basis: 50%;
 }
 
-.timeSlot {
-  display: flex;
-  margin-top: auto;
-  margin-bottom: auto;
-}
+@media (min-width: 768px) {
+  .container {
+    background-color: $bg-color;
+    padding: 12px 4px;
+    display: flex;
+    flex-direction: row-reverse;
+    height: 100vh;
+    justify-content: start;
+  }
 
-.timeSlot__list {
-  list-style: none;
-  display: flex;
-  flex-wrap: nowrap;
-  overflow-x: auto;
-  -webkit-overflow-scrolling: touch;
-}
+  .tempCityContainer {
+    flex-direction: column;
+    justify-content: center;
+    align-items: end;
+    padding-right: 2rem;
+    padding-top: 2rem;
+    flex-basis: 30%;
+    justify-content: space-between;
+  }
 
-.timeSlot__item {
-  display: flex;
-  flex-direction: column;
-  margin-left: 12px;
-  padding: 12px 12px;
-  border-radius: 6rem;
-  border: 2px solid $text-color;
-  align-items: center;
-  text-align: center;
-  width: 65px;
-  flex-shrink: 0;
-  font-weight: bold;
-}
+  .statusSelectorContainer {
+    flex-direction: column-reverse;
+    flex-basis: 70%;
+    padding-top: 24px;
+  }
 
-.timeSlot__item__active {
-  @extend .timeSlot__item;
-  background-color: $text-color;
-  color: $bg-color;
-}
+  .timeSlot {
+    margin-bottom: 3rem;
+    margin-top: 0;
+  }
 
-.timeSlot__itemTime {
-  padding: 12px 2px;
-}
+  .timeSlot__list {
+    flex-wrap: wrap;
+  }
 
-.timeSlot__itemTemp {
-  padding: 12px 2px;
+  .timeSlot__item {
+    margin-top: 1rem;
+    padding: 0;
+  }
+
+  .timeSlot__itemTemp {
+    display: none;
+  }
+
+  .weatherDescription {
+    font-size: 128px;
+    font-weight: bold;
+    flex-grow: 1;
+    line-height: 0.9;
+  }
+
+  .dateSelectorContainer {
+    margin-top: 1rem;
+  }
 }
