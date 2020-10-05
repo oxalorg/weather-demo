@@ -1,0 +1,28 @@
+$text-color: #000000;
+$bg-color: #ececec;
+
+.container {
+  display: flex;
+  align-items: center;
+  margin-bottom: 0px;
+}
+
+.item {
+  margin-left: 4px;
+  font-weight: bold;
+  font-size: 0.8em;
+  padding: 12px;
+}
+
+.item__active {
+  @extend .item;
+  background-color: $text-color;
+  color: $bg-color;
+  border-radius: 6rem;
+}
+
+@media (min-width: 768px) {
+  .container {
+    margin-bottom: 1rem;
+  }
+}
