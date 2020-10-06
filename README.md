@@ -1,8 +1,10 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Weather Demo Application
 
-## Getting Started
+This is a weather forecast application showing hourly data from the next 2 days.
 
-First, run the development server:
+The master branch is deployed on: [https://weather-demo.vercel.app/](https://weather-demo.vercel.app/)
+
+## Development Instructions
 
 ```bash
 npm run dev
@@ -10,21 +12,50 @@ npm run dev
 yarn dev
 ```
 
+First we need to create a `.env.local` file to store our build time env vars:
+
+```bash
+echo "OPENWEATHER_API=$API_KEY" >> .env.local
+```
+
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+## Flow
 
-## Learn More
+- User visits website
+- Check localStorage if we users location data cached
+- If not ask for geolocation permission
+- User accepts and the geolocation is fetched
+  - The location data is stored in localStorage so we don't have to ask everytime
+- The browser now calls an api with the geolocation to fetch weather details
+  - Call to api is: `/api/weather/$lat/$lon`
+- The api call is wrapped with SWR package, this keeps our state up to date by calling the API again at certain intervals/events
 
-To learn more about Next.js, take a look at the following resources:
+## Design decisions
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+The project could have been built with a complete client side solution, but I choose to use Next.js as a way to
+keep the project flexible and keep our API calls to openweather secure.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+In a production environment, ideally we will have to add caching & throttling to the openweather api calls and nextjs gives us this flexibility.
 
-## Deploy on Vercel
+Nextjs hydrates the pages and builds either static or server rendered pages. Since we had to get user's geolocation,
+I decided to not render a server side page and instead build it on the client. This is bad for SEO purposes.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/import?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+An alternative would be to use a service like ipinfo or geolocation-db to fetch details from the IP on the server side. This would allow us to get rid of the browsers geolocation api (which is a bit inconsistent across browsers, and requires permission) and build the entire page on the server.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+Currently the background shape color is changing randomly, as an extra feature I would like to have custom logic to change the image/color based on the temp.
+
+Finally I decided to use CSS Modules with SCSS support. Unfortunately since this is my first next.js application, I was unaware of the shortcomings. This lead to two problems:
+
+- Nextjs does not support global scss variables with CSS Modules. There is an experimental feature but it was more work than I initally thought and could not get it to work properly.
+- Since nextjs has native modules support and ignores the `postcss-modules` plugin, it does not play well with `purgecss` which is needed to build manageable tailwind production builds. (So I had to get rid of tailwind too)
+
+I tried to stick to the UI given in dribble as accurately as possible but had to improve a little.
+
+The "Tomorrow" part of the time slot looks ugly having 24 different buttons. I would ideally change it to show larger intervals depending on the hours left in the day. For example:
+
+- if 24 slots are available, show only 8 slots at 3 hour intervals
+- if 16 slots are available, show only 8 slots at 2 hour intervals
+- or maybe use a graph/slider instead of buttons
+
+Even in this limited project, I feel there are many scopes of improvement. But I feel the current implementation is a good indication of how I would code in a real world scenario.
