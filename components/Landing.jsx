@@ -42,7 +42,6 @@ const Landing = ({ weather }) => {
 
   const selectCurrentTimeSlot = (dt) => {
     let selected = hourly.find((item) => item.dt === dt);
-    console.log(selected);
     setCurrent(selected);
   };
 
