@@ -6,6 +6,7 @@ import styles from "./Landing.module.scss";
 import DateSelector from "./DateSelector";
 import HourlyList from "./HourlyList";
 import FadeAnimation from "./FadeAnimation";
+import LoadingSpinner from "./LoadingSpinner";
 import { CSSTransition } from "react-transition-group";
 
 const UserCity = ({ timezone }) => {
