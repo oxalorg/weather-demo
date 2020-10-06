@@ -1,10 +1,15 @@
 import axios from "axios";
 
 export default async (req, res) => {
+  const {
+    query: { params },
+  } = req;
+  console.log(params);
+
   res.statusCode = 200;
   const API_KEY = process.env.OPENWEATHER_API_KEY;
-  const lat = "19.069979699999998";
-  const lon = "72.8397202";
+  const lat = params[0];
+  const lon = params[1];
 
   let weatherRes = await axios({
     method: "GET",
