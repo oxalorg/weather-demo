@@ -43,6 +43,8 @@ I decided to not render a server side page and instead build it on the client. T
 
 An alternative would be to use a service like ipinfo or geolocation-db to fetch details from the IP on the server side. This would allow us to get rid of the browsers geolocation api (which is a bit inconsistent across browsers, and requires permission) and build the entire page on the server.
 
+_I have not handled the unhappy path where the user denies the geolocation permission request. This can be solved using the Browsers `permissions.query` API but that is not completely supported in iOS/Safari_
+
 Currently the background shape color is changing randomly, as an extra feature I would like to have custom logic to change the image/color based on the temp.
 
 Finally I decided to use CSS Modules with SCSS support. Unfortunately since this is my first next.js application, I was unaware of the shortcomings. This lead to two problems:
@@ -57,5 +59,7 @@ The "Tomorrow" part of the time slot looks ugly having 24 different buttons. I w
 - if 24 slots are available, show only 8 slots at 3 hour intervals
 - if 16 slots are available, show only 8 slots at 2 hour intervals
 - or maybe use a graph/slider instead of buttons
+
+One more (subjective) UI improvement would be to automatically select the first time slot when a date is changed.
 
 Even in this limited project, I feel there are many scopes of improvement. But I feel the current implementation is a good indication of how I would code in a real world scenario.
