@@ -12,7 +12,6 @@ const usePosition = () => {
   const KEY = "user-position";
 
   useEffect(() => {
-    console.log("USE EFFECT WAS RUN");
     let pos = JSON.parse(localStorage.getItem(KEY), {});
     if (!pos || !pos.lat || !pos.lon) {
       navigator.geolocation.getCurrentPosition(
@@ -23,7 +22,7 @@ const usePosition = () => {
           localStorage.setItem(KEY, JSON.stringify(pos));
           setPosition(pos);
         },
-        (err) => console.log("EROROROROOR", err)
+        () => alert("Permission denied. Please refresh and try again.")
       );
     } else {
       setPosition(pos);

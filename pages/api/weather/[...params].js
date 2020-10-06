@@ -4,12 +4,20 @@ export default async (req, res) => {
   const {
     query: { params },
   } = req;
-  console.log(params);
 
-  res.statusCode = 200;
+  if (params.length !== 2 || !params[0] || !params[1]) {
+    res.statusCode = 400;
+    res.end("Invalid parameteres. Need 2 floats for Latitude and Longitude.");
+  }
+
+  const [lat, lon] = params;
+  const primitiveLatLonMatch = /^[-+]?\d+(\.\d+)?$/;
+  if (!lat.match(primitiveLatLonMatch) || !lon.match(primitiveLatLonMatch)) {
+    res.statusCode = 400;
+    res.end("Invalid latitude and longitide values.");
+  }
+
   const API_KEY = process.env.OPENWEATHER_API_KEY;
-  const lat = params[0];
-  const lon = params[1];
 
   let weatherRes = await axios({
     method: "GET",
@@ -23,5 +31,6 @@ export default async (req, res) => {
   });
 
   let weather = weatherRes.data;
+  res.statusCode = 200;
   res.json(weather);
 };
