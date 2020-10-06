@@ -5,9 +5,10 @@ export default async (req, res) => {
     query: { params },
   } = req;
 
-  if (params.length !== 2 || !params[0] || !params[1]) {
+  if (!params || params.length !== 2 || !params[0] || !params[1]) {
     res.statusCode = 400;
     res.end("Invalid parameteres. Need 2 floats for Latitude and Longitude.");
+    return;
   }
 
   const [lat, lon] = params;
@@ -15,6 +16,7 @@ export default async (req, res) => {
   if (!lat.match(primitiveLatLonMatch) || !lon.match(primitiveLatLonMatch)) {
     res.statusCode = 400;
     res.end("Invalid latitude and longitide values.");
+    return;
   }
 
   const API_KEY = process.env.OPENWEATHER_API_KEY;
