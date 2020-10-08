@@ -15,7 +15,7 @@ yarn dev
 First we need to create a `.env.local` file to store our build time env vars:
 
 ```bash
-echo "OPENWEATHER_API=$API_KEY" >> .env.local
+echo "OPENWEATHER_API_KEY=$API_KEY" >> .env.local
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
